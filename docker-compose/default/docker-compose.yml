@@ -410,44 +410,6 @@ services:
       file: common-config.yml
       service: microservice-eureka-config
 
-  temporal-postgresql:
-    image: postgres:13
-    environment:
-      - POSTGRES_USER=temporal
-      - POSTGRES_PASSWORD=temporal
-    ports:
-      - "5432:5432"
-    networks:
-      - roadmaplearner
-
-  temporal:
-    image: temporalio/auto-setup:latest
-    ports:
-      - "7233:7233"
-    environment:
-      - DB=postgresql
-      - DB_PORT=5432
-      - POSTGRES_USER=temporal
-      - POSTGRES_PWD=temporal
-      - POSTGRES_SEEDS=temporal-postgresql
-      - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/development-sql.yaml
-    depends_on:
-      - temporal-postgresql
-    networks:
-      - roadmaplearner
-
-  temporal-ui:
-    image: temporalio/ui:latest
-    ports:
-      - "8081:8080"
-    environment:
-      - TEMPORAL_ADDRESS=temporal:7233
-      - TEMPORAL_CORS_ORIGINS=http://localhost:3000
-    depends_on:
-      - temporal
-    networks:
-      - roadmaplearner
-
 networks:
   roadmaplearner:
     driver: "bridge"

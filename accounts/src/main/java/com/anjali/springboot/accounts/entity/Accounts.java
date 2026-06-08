@@ -7,12 +7,15 @@ import lombok.*;
 
 @Entity
 @Table
-@Getter@Setter@ToString@AllArgsConstructor@NoArgsConstructor
-public class Accounts extends BaseEntity{
-    private Long customerId;
-    @Id
-    private Long accountNumber;
-    private String accountType;
-    private String branchAddress;
-
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+public class Accounts extends BaseEntity {
+  private Long customerId;
+  @Id private Long accountNumber;
+  private String accountType;
+  private String branchAddress;
+  private int balance;
 }
